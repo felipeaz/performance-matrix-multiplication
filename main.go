@@ -2,18 +2,24 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"matrix-multiplication/matrix"
-	"time"
+	"strings"
 )
 
 func main() {
-	fmt.Println("Started multiplication")
+	var performance string
+	fmt.Println("Performance mode? (Y/N)")
+	_, err := fmt.Scanln(&performance)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	start := time.Now()
-	matrixA := matrix.GenerateSquareMatrix()
-	matrixB := matrix.GenerateSquareMatrix()
-	matrix.Multiply(matrixA, matrixB)
-
-	elapsed := time.Since(start)
-	fmt.Printf("Process took %s\n", elapsed)
+	fmt.Println("Starting Process")
+	switch strings.ToUpper(performance) {
+	case "Y":
+		matrix.StartProcess()
+	default:
+		matrix.Start()
+	}
 }
